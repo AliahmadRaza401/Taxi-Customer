@@ -59,5 +59,8 @@ static const primarylightblue = Color(0xffE6EDF5);
    static const Kblue=Color(0xffDDF1FF);
 static const kformborderColor =Color(0xffE2E7ED);
 static const kgrableColor4 = Color(0xFF141414);
+static const kgreyEE = Color(0xffEEEEEE);
+static const kgrey9E = Color(0xff9E9E9E);
+
 
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +8,7 @@ import 'package:game_on/core/widgets/custom_phone_textfield.dart';
 import 'package:game_on/core/widgets/custom_text.dart';
 import 'package:game_on/core/widgets/custom_textfield.dart';
 import 'package:game_on/core/widgets/primary_button.dart';
+import 'package:game_on/features/passenger/authentication/signup/terms_conditions.dart';
 import 'package:game_on/routes/app_routes.dart';
 import 'package:get/get.dart';
 
@@ -69,7 +71,7 @@ class SignInScreen extends StatelessWidget {
                   Center(
                     child: SizedBox(
                       width: Get.width * 0.7,
-                    
+
                       child: CText(
                         alignText: TextAlign.center,
                         text: 'Enter your mobile number to Login or Register',
@@ -95,7 +97,6 @@ class SignInScreen extends StatelessWidget {
                     width: double.infinity,
                   ),
 
-
                   SizedBox(height: 15.h),
                   Center(
                     child: CText(text: 'or', fontSize: 16.sp),
@@ -120,38 +121,45 @@ class SignInScreen extends StatelessWidget {
                       _socialIcon(AppImages.apple),
                     ],
                   ),
-                    SizedBox(height: 30.h),
-                    Center(
-                      child: RichText(
+                  SizedBox(height: 30.h),
+                  Center(
+                    child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        style: TextStyle(
-                        fontSize: 16.sp,
-                        color: Colors.black,
-                        ),
+                        style: TextStyle(fontSize: 16.sp, color: Colors.black),
                         children: [
-                        const TextSpan(text: 'By creating an account, you agree to our\n'),
-                        TextSpan(
-                          text: 'Terms of Service',
-                          style: TextStyle(
-                          color: AppColors.kprimaryColor,
-                          decoration: TextDecoration.underline,
+                          const TextSpan(
+                            text: 'By creating an account, you agree to our\n',
                           ),
-                      
-                        ),
-                        const TextSpan(text: ' and '),
-                        TextSpan(
-                          text: 'Privacy Policy',
-                          style: TextStyle(
-                          color: AppColors.kprimaryColor,
-                          decoration: TextDecoration.underline,
+                          TextSpan(
+                            text: 'Terms of Service',
+                            style: TextStyle(
+                              color: AppColors.kprimaryColor,
+                              decoration: TextDecoration.underline,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                // Navigate to Terms of Service screen
+                                Get.to(() => TermsConditions());
+                              },
                           ),
-                  
-                        ),
+                          const TextSpan(text: ' and '),
+                          TextSpan(
+                            text: 'Privacy Policy',
+                            style: TextStyle(
+                              color: AppColors.kprimaryColor,
+                              decoration: TextDecoration.underline,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                // Navigate to Privacy Policy screen
+                                Get.to(() => TermsConditions());
+                              },
+                          ),
                         ],
                       ),
-                      ),
                     ),
+                  ),
                 ],
               ),
             ),
@@ -173,6 +181,4 @@ class SignInScreen extends StatelessWidget {
       child: SvgPicture.asset(path, fit: BoxFit.contain),
     );
   }
-
-
 }

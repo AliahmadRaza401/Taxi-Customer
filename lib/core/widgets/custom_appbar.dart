@@ -21,24 +21,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return PreferredSize(
       preferredSize: Size.fromHeight(120.h),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          // shadowColor: Colors.transparent,
-          leadingWidth: 40.w,
-          leading: leadingIcon
-              ? GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Container(
-                    width: 40.w,
-                    height: 40.h,
-                    // decoration: const BoxDecoration(
-                    //     shape: BoxShape.circle,
-                    //     color: AppColors.primarywhiteColor),
-                    child: Center(
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        // shadowColor: Colors.transparent,
+        leadingWidth: 40.w,
+        leading: leadingIcon
+            ? GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  width: 40.w,
+                  height: 40.h,
+                  // decoration: const BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     color: AppColors.primarywhiteColor),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
                       child: Icon(
                         Icons.arrow_back,
                         color: AppColors.kprimaryColor,
@@ -46,21 +46,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ),
                   ),
-                )
-              : const SizedBox(),
-          title: Text(
-            text,
-            style: TextStyle(
-              fontSize: 19.sp,
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
-              fontFamily: "Poppins",
-            ),
+                ),
+              )
+            : const SizedBox(),
+        title: Text(
+          text,
+          style: TextStyle(
+            fontSize: 19.sp,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            fontFamily: "Poppins",
           ),
-          centerTitle: true,
-          elevation: 0,
-          actions: const [],
         ),
+        centerTitle: true,
+        elevation: 0,
+        actions: const [],
       ),
     );
   }

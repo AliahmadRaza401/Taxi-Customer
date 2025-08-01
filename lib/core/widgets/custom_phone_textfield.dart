@@ -123,7 +123,7 @@ class _PhonePickerFieldState extends State<PhonePickerField> {
               fontSize: 16.sp,
               fontFamily: 'Poppins',
             ),
-            initialValue: PhoneNumber(isoCode: widget.isoCode ?? 'PK'),
+            initialValue: PhoneNumber(isoCode: widget.isoCode ?? 'NG'),
             textFieldController: widget.controller,
             // formatInput: true,
             keyboardType: widget.keyboardType,

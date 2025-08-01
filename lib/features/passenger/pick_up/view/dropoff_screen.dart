@@ -84,6 +84,8 @@ class DropoffScreen extends StatelessWidget {
             ),
           ),
 
+
+
           Positioned(
             bottom: 20,
             left: 20,
@@ -102,7 +104,7 @@ class DropoffScreen extends StatelessWidget {
             bcolor: AppColors.kprimaryColor,
             tcolor: AppColors.kprimaryColor,
             onTap: (){
-              Get.toNamed(AppRoutes.selectPickUp);
+              Get.toNamed(AppRoutes.driverFound);
             })
               ],
             ),

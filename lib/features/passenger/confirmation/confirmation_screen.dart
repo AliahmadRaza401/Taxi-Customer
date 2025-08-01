@@ -5,6 +5,7 @@ import 'package:game_on/core/constants/app_images.dart';
 import 'package:game_on/core/widgets/custom_appbar.dart';
 import 'package:game_on/core/widgets/custom_text.dart';
 import 'package:game_on/core/widgets/primary_button.dart';
+import 'package:game_on/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'confirmation_controller.dart';
 
@@ -39,7 +40,7 @@ class ConfirmationScreen extends GetView<ConfirmationController> {
             ),
           SizedBox(height: Get.height*0.3,),
            PrimaryButton(text: 'Done', onTap: (){
-            Get.back();
+            Get.offAndToNamed(AppRoutes.tripEnd);
            })
           ],
         ),

@@ -6,6 +6,7 @@ import 'package:game_on/core/widgets/custom_text.dart';
 import 'package:game_on/core/widgets/custom_textfield.dart';
 import 'package:game_on/core/widgets/primary_button.dart';
 import 'package:game_on/features/passenger/pick_up/controller/location_controller.dart';
+import 'package:game_on/features/passenger/pick_up/view/cancel_ride_screen.dart';
 import 'package:game_on/routes/app_routes.dart';
 import 'package:get/get.dart';
 
@@ -168,19 +169,25 @@ class SelectPickUpScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          ListTile(
-                            leading: Image.asset(
-                              selected.iconPath,
-                              width: 40,
-                              height: 40,
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10,)
+                          ,    border: Border.all(color: AppColors.kwhite)
                             ),
-                            title: Text(
-                              '${selected.name} - ₦${selected.price}',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            subtitle: Text(
-                              selected.description,
-                              style: TextStyle(color: Colors.white70),
+                            child: ListTile(
+                              leading: Image.asset(
+                                selected.iconPath,
+                                width: 40,
+                                height: 40,
+                              ),
+                              title: Text(
+                                '${selected.name} - ₦${selected.price}',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              subtitle: Text(
+                                selected.description,
+                                style: TextStyle(color: Colors.white70),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -194,12 +201,30 @@ class SelectPickUpScreen extends StatelessWidget {
                             Get.toNamed(AppRoutes.payment);
                             },
                           ),
+                          SizedBox(height: 10.h,),
+                          PrimaryButton(
+                            text: 'Cancel',
+                            color: AppColors.kwhite,
+                            width: double.infinity,
+                            tcolor: AppColors.kprimaryColor,
+                            bcolor: AppColors.kprimaryColor,
+                            onTap: () {
+                            // Get.toNamed(AppRoutes.driverFound);
+                            Navigator.push(
+  context,
+  MaterialPageRoute(builder: (_) => const CancelRideScreen()),
+);
+
+                            },
+                          ),
                         ],
                       );
                     }),
                   ),
                   isScrollControlled: true,
                 );
+              
+              
               },
             ),
             SizedBox(height: 20),
