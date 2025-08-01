@@ -1,6 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:game_on/routes/app_routes.dart';
 import 'package:get/get.dart';
 
 import 'package:game_on/core/constants/app_colors.dart';
@@ -277,7 +278,9 @@ class CustomMapAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: IconButton(
         icon: Icon(icon, size: 20.w),
         color: AppColors.kwhite,
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed(AppRoutes.notification);
+        },
       ),
     );
   }

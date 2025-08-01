@@ -24,14 +24,14 @@ class SignupScreen extends StatelessWidget {
           Stack(
             children: [
               SvgPicture.asset(AppImages.upperbg, fit: BoxFit.cover),
-              Positioned(
-                top: 20.h,
-                left: 10.w,
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed: () => Get.back(),
-                ),
-              ),
+              // Positioned(
+              //   top: 20.h,
+              //   left: 10.w,
+              //   child: IconButton(
+              //     icon: const Icon(Icons.arrow_back, color: Colors.white),
+              //     onPressed: () => Get.back(),
+              //   ),
+              // ),
               Align(
                 alignment: Alignment.center,
                 child: Padding(
