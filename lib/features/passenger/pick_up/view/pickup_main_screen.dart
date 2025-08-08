@@ -17,159 +17,178 @@ class PickupMainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<LocationController>();
+    final locationController = Get.find<LocationController>();
 
     return Scaffold(
       appBar: CustomMapAppBar(text: 'Pickup Location', leadingIcon: false),
-      body: Stack(
-        children: [
-          GoogleMap(
-            initialCameraPosition: CameraPosition(
-              target: LatLng(6.5244, 3.3792),
-              zoom: 14,
-            ),
-            myLocationEnabled: true,
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                color: AppColors.kprimaryColor,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      body: GetBuilder<LocationController>(
+        init: LocationController(),
+        builder: (controller) {
+          return Stack(
+            children: [
+              GoogleMap(
+                initialCameraPosition: CameraPosition(
+                  target: controller.currentLatLng.value,
+                  zoom: 14,
+                ),
+                myLocationEnabled: true,
+                markers: controller.markers.value,
+                onMapCreated: (GoogleMapController googleMapController) {
+                  controller.mapController = googleMapController;
+                },
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: const BoxDecoration(
+                    color: AppColors.kprimaryColor,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      CText(
-                        text: 'Where to?',
-                        fontSize: 16.sp,
-                        color: AppColors.kwhite,
-                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CText(
+                            text: 'Where to?',
+                            fontSize: 16.sp,
+                            color: AppColors.kwhite,
+                          ),
 
+                          GestureDetector(
+                            onTap: () => _showScheduleSheet(context),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.calendar_month,
+                                  color: AppColors.kwhite,
+                                  size: 16.w,
+                                ),
+                                SizedBox(width: 4.w),
+                                CText(
+                                  text: 'Book now',
+                                  fontSize: 16.sp,
+                                  color: AppColors.kwhite,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: AppColors.kwhite,
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // Container(
+                          //   padding: EdgeInsets.symmetric(
+                          //     horizontal: 16,
+                          //     vertical: 8,
+                          //   ),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(8),
+                          //     border: Border.all(color: Colors.grey),
+                          //     color: Colors.white,
+                          //   ),
+                          //   child: DropdownButton<String>(
+                          //     isExpanded: true,
+                          //     value: null,
+                          //     items: [
+                          //       DropdownMenuItem(
+                          //         value: 'book_now',
+                          //         child: Text('Book Now'),
+                          //       ),
+                          //     ],
+                          //     onChanged: (value) {
+                          //       if (value == 'book_now') {
+                          //         _showScheduleSheet(context);
+                          //       }
+                          //     },
+                          //     hint: const Text('Select Action'),
+                          //     underline: const SizedBox(),
+                          //     icon: const Icon(Icons.arrow_drop_down),
+                          //   ),
+                          // ),
+                        ],
+                      ),
                       GestureDetector(
-                        onTap: () => _showScheduleSheet(context),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.calendar_month,
-                              color: AppColors.kwhite,
-                              size: 16.w,
+                        onTap: (){
+                          controller.goolePlacePicker(isPickUp: true);
+                        },
+                        child: CustomTextField(
+                          controller: TextEditingController(),
+                          enable: false,
+                          hintText: controller.selectedPickUpAddress.value.isEmpty
+                              ? 'Enter your destination '
+                              : controller.selectedPickUpAddress.value,
+                          keyboardType: TextInputType.none,
+                          hasPreffix: true,
+                          preffixIcon: Icon(Icons.search),
+
+                          textcolor: AppColors.kprimaryColor,
+
+                          // suffixIcon: Icon(Icons.skip_next),
+                          suffixIcon: GestureDetector(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 16.0),
+                              child: CText(
+                                text: '',
+                                fontSize: 14.sp,
+                                alignText: TextAlign.center,
+                              ),
                             ),
-                            SizedBox(width: 4.w),
-                            CText(
-                              text: 'Book now',
-                              fontSize: 16.sp,
-                              color: AppColors.kwhite,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            Icon(
-                              Icons.keyboard_arrow_down,
-                              color: AppColors.kwhite,
-                            ),
-                          ],
+                          ),
+
+                          hasSuffix: true,
                         ),
                       ),
-
-                      // Container(
-                      //   padding: EdgeInsets.symmetric(
-                      //     horizontal: 16,
-                      //     vertical: 8,
-                      //   ),
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(8),
-                      //     border: Border.all(color: Colors.grey),
-                      //     color: Colors.white,
-                      //   ),
-                      //   child: DropdownButton<String>(
-                      //     isExpanded: true,
-                      //     value: null,
-                      //     items: [
-                      //       DropdownMenuItem(
-                      //         value: 'book_now',
-                      //         child: Text('Book Now'),
-                      //       ),
-                      //     ],
-                      //     onChanged: (value) {
-                      //       if (value == 'book_now') {
-                      //         _showScheduleSheet(context);
-                      //       }
-                      //     },
-                      //     hint: const Text('Select Action'),
-                      //     underline: const SizedBox(),
-                      //     icon: const Icon(Icons.arrow_drop_down),
-                      //   ),
+                      const SizedBox(height: 10),
+                      // PrimaryButton(
+                      //   text: 'Book now',
+                      //   onTap: () {
+                      //     _showScheduleSheet(context);
+                      //   },
+                      // ),
+                      // ElevatedButton(
+                      //   onPressed: () => _showScheduleSheet(context),
+                      //   child: const Text('Book now'),
+                      // ),
+                      const SizedBox(height: 10),
+                      PrimaryButton(
+                        width: double.infinity,
+                        text: 'Confirm Pickup',
+                        color: AppColors.kwhite,
+                        tcolor: AppColors.kprimaryColor,
+                        onTap: () {
+                          Get.toNamed(AppRoutes.dropoof);
+                        },
+                      ),
+                      // ElevatedButton(
+                      //   onPressed: () => Get.toNamed('/dropoff'),
+                      //   child: const Text('Confirm Pickup'),
                       // ),
                     ],
                   ),
-                  CustomTextField(
-                    controller: TextEditingController(),
-                    hintText: 'Enter your destination ',
-                    keyboardType: TextInputType.text,
-                    hasPreffix: true,
-                    preffixIcon: Icon(Icons.search),
-
-                    textcolor: AppColors.kprimaryColor,
-                    // suffixIcon: Icon(Icons.skip_next),
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: CText(text:'Skip',fontSize: 14.sp,alignText: TextAlign.center,),
-                      ),
-                    ),
-                    
-                    hasSuffix: true,
-                  ),
-                  const SizedBox(height: 10),
-                  // PrimaryButton(
-                  //   text: 'Book now',
-                  //   onTap: () {
-                  //     _showScheduleSheet(context);
-                  //   },
-                  // ),
-                  // ElevatedButton(
-                  //   onPressed: () => _showScheduleSheet(context),
-                  //   child: const Text('Book now'),
-                  // ),
-                  const SizedBox(height: 10),
-                  PrimaryButton(
-                    width: double.infinity,
-                    text: 'Confirm Pickup',
-                    color: AppColors.kwhite,
-                    tcolor: AppColors.kprimaryColor,
-                    onTap: () {
-                      Get.toNamed(AppRoutes.dropoof);
-
-                    },
-                  ),
-                  // ElevatedButton(
-                  //   onPressed: () => Get.toNamed('/dropoff'),
-                  //   child: const Text('Confirm Pickup'),
-                  // ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
 
   void _showScheduleSheet(BuildContext context) {
     showModalBottomSheet(
-      
       context: context,
-      
+
       shape: const RoundedRectangleBorder(
-        
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (_) => const PickupScheduleSheet(),

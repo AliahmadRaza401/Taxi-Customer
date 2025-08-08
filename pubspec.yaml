@@ -42,7 +42,7 @@ dependencies:
   calendar_date_picker2: 
   flutter_staggered_grid_view: 
   get_storage: 
-  flutter_map: 
+#  flutter_map:
 #  google_maps_flutter: ^2.7.0
   form_validator: 
   get: 
@@ -65,8 +65,8 @@ dependencies:
       url: https://github.com/Shahidbangash/intl_phone_number_input.git
       ref: develop
   flutter_slider_drawer: 
-#  google_maps_place_picker_mb: ^3.1.2
-  latlong2: 
+# google_maps_place_picker_mb: ^3.1.2
+#  latlong2:
   intl: 
   url_launcher:
   custom_rating_bar: 
@@ -76,7 +76,9 @@ dependencies:
   flutter_pdfview: 
   path_provider: 
   pin_code_fields:
-  firebase_core: 
+  firebase_core:
+  place_picker_google: ^0.0.20
+  google_polyline_points: ^0.0.3
 
 
 

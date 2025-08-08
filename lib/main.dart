@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
           themeMode: themeController.themeMode,
           // theme: AppTheme.lightTheme,  
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.splash,
+          // initialRoute: AppRoutes.splash,
+          initialRoute: AppRoutes.pickUp,
           getPages: AppPages.routes,
         );
       },
