@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:game_on/core/constants/app_colors.dart';
+import 'package:game_on/core/utils/app_toast.dart';
 import 'package:game_on/core/widgets/custom_appbar.dart';
 import 'package:game_on/core/widgets/custom_text.dart';
 import 'package:game_on/core/widgets/custom_textfield.dart';
@@ -166,7 +167,12 @@ class PickupMainScreen extends StatelessWidget {
                         color: AppColors.kwhite,
                         tcolor: AppColors.kprimaryColor,
                         onTap: () {
-                          Get.toNamed(AppRoutes.dropoof);
+                          if (controller.selectedPickUpAddress.value == "") {
+                            AppToast.failToast("Please selected the pickup Location");
+                          } else {
+                            Get.toNamed(AppRoutes.dropoof);
+                          }
+
                         },
                       ),
                       // ElevatedButton(
